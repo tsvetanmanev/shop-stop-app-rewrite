@@ -14,15 +14,13 @@
       </ul>
     </nav>
   </header>
-  <form class="form center-form" method="post">
+  <form class="form center-form" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="name">Image Name</label>
       <input type="text" id="name" name="name" class="input-field" />
     </div>
-
     <div class="form-group">
-      <label for="url">Image URL</label>
-      <input type="text" id="url" name="url" class="input-field" />
+      <input type="file" id="upload" name="upload" class="input-field"/>
     </div>
 
     <div class="form-group">

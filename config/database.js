@@ -1,14 +1,28 @@
-// const fs = require('fs')
+const fs = require('fs')
+const path = require('path')
 
-// const dataFilePath = 'storage.dat'
+const dbPath = path.join(__dirname, '/database.json')
 
 let data = []
 
+function save (data) {
+  let jsonData = JSON.stringify(data)
+  fs.writeFileSync(dbPath, jsonData)
+}
+
 let add = (image) => {
   data.push(image)
+  save(data)
 }
 
 let getAll = () => {
+  if (!fs.existsSync(dbPath)) {
+    fs.writeFileSync(dbPath, '[]')
+    return []
+  }
+
+  let jsonData = fs.readFileSync(dbPath).toString() || '[]'
+  data = JSON.parse(jsonData)
   return data.slice(0)
 }
 
@@ -18,16 +32,8 @@ let get = (idString) => {
   return array[id]
 }
 
-// let get = (id) => {
-//   return data[id]
-// }
-
-
 module.exports = {
   add: add,
   get: get,
   getAll: getAll
-  // get: get,
-  // save: save,
-  // load: load
 }

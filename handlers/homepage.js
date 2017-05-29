@@ -4,7 +4,7 @@ const database = require('../config/database.js')
 
 module.exports = (req, res) => {
   if (req.path === '/') {
-    fs.readFile('./build/views/home/index.html', 'utf8', (err, data) => {
+    fs.readFile('./views/home/index.html', 'utf8', (err, data) => {
       if (err) {
         console.log(err)
         return

@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     let image = database.get(imageId)
 
     if (image) {
-      fs.readFile('./build/views/images/details.html', 'utf8', (err, data) => {
+      fs.readFile('./views/images/details.html', 'utf8', (err, data) => {
         if (err) {
           console.log(err)
           return

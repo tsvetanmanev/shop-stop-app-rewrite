@@ -4,7 +4,7 @@ const database = require('../config/database.js')
 module.exports = (req, res) => {
   let statusHeader = req.headers['status-header']
   if (statusHeader && statusHeader === 'Full') {
-    fs.readFile('./build/views/special/status.html', 'utf8', (err, data) => {
+    fs.readFile('./views/special/status.html', 'utf8', (err, data) => {
       if (err) {
         console.log(err)
         return
