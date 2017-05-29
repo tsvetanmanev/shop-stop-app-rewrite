@@ -1,0 +1,1 @@
+"# shop-stop-app-rewrite" 
