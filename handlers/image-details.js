@@ -18,9 +18,10 @@ module.exports = (req, res) => {
           console.log(err)
           return
         }
+        let imageDisplayAddress = image.url // './content/user-images/Penguins.jpg'
         let imageDetailsHtml = `
         <h2>${image.name}</h2>
-        <img src="${image.url}">`
+        <img src="${imageDisplayAddress}">`
         data = data.replace('{{content}}', imageDetailsHtml)
 
         res.writeHead(200, {

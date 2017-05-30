@@ -29,11 +29,11 @@ module.exports = (req, res) => {
       console.log(fields)
       console.log(files)
       let uploadedFile = files['upload']
-      let imagePath = './content/user-images/' + uploadedFile.name
+      let imagePath = '/content/user-images/' + uploadedFile.name
       let imageData = {}
       imageData.name = fields.name
       imageData.url = imagePath
-      fs.rename(uploadedFile.path, imagePath, err => {
+      fs.rename(uploadedFile.path, '.' + imagePath, err => {
         if (err) {
           console.log(err)
           return
