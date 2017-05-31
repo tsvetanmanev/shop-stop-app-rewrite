@@ -4,8 +4,6 @@ const database = require('../config/database.js')
 
 module.exports = (req, res) => {
   let urlParams = req.path.split('/')
-
-
   if (urlParams[1] === 'images' &&
     urlParams[2] === 'details' &&
     req.method === 'GET') {
@@ -18,7 +16,7 @@ module.exports = (req, res) => {
           console.log(err)
           return
         }
-        let imageDisplayAddress = image.url // './content/user-images/Penguins.jpg'
+        let imageDisplayAddress = image.url // '/content/user-images/Penguins.jpg'
         let imageDetailsHtml = `
         <h2>${image.name}</h2>
         <img src="${imageDisplayAddress}">`

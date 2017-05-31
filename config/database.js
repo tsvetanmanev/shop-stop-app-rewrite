@@ -10,9 +10,18 @@ function save (data) {
   fs.writeFileSync(dbPath, jsonData)
 }
 
+function load () {
+  let jsonData = fs.readFileSync(dbPath)
+  data = JSON.parse(jsonData)
+}
+
 let add = (image) => {
+  load()
   data.push(image)
   save(data)
+
+  let idOfSavedImage = data.length
+  return idOfSavedImage
 }
 
 let getAll = () => {
@@ -32,8 +41,14 @@ let get = (idString) => {
   return array[id]
 }
 
+let getNextId = () => {
+  let nextId = getAll().length
+  return nextId
+}
+
 module.exports = {
   add: add,
   get: get,
-  getAll: getAll
+  getAll: getAll,
+  getNextId: getNextId
 }

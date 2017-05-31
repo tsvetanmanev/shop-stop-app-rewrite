@@ -1,6 +1,7 @@
 const fs = require('fs')
 const querystring = require('querystring')
 const formidable = require('formidable')
+const shortid = require('shortid')
 
 const database = require('../config/database.js')
 
@@ -26,14 +27,26 @@ module.exports = (req, res) => {
         console.log(err)
         return
       }
-      console.log(fields)
-      console.log(files)
       let uploadedFile = files['upload']
-      let imagePath = '/content/user-images/' + uploadedFile.name
+
+      let imageIdinDatabase = database.getNextId() // database.add(imageData)
+      let imageFolderNumber = (imageIdinDatabase % 1000)
+
+      let imageDir = `/content/user-images/${imageFolderNumber}`
+      let imagePath = `${imageDir}/${uploadedFile.name}`
+
       let imageData = {}
       imageData.name = fields.name
       imageData.url = imagePath
-      fs.rename(uploadedFile.path, '.' + imagePath, err => {
+
+      let imageDirOnServer = '.' + imageDir
+
+      if (!fs.existsSync(imageDirOnServer)) {
+        fs.mkdirSync(imageDirOnServer)
+      }
+
+      let imagePathOnServer = '.' + imagePath
+      fs.rename(uploadedFile.path, imagePathOnServer, err => {
         if (err) {
           console.log(err)
           return
