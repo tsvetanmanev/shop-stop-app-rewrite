@@ -10,7 +10,7 @@ module.exports = (req, res) => {
         return
       }
 
-      let images = database.getAll()
+      let images = database.getAllPublic()
       let resultHtml = ''
 
       resultHtml += '<ul>'
@@ -18,7 +18,7 @@ module.exports = (req, res) => {
         let image = images[i]
         resultHtml += `
         <li>
-          <a href="/images/details/${i}">${image.name}</a>
+          <a href="${image.url}">${image.name}</a>
         </li>
         `
       }

@@ -32,11 +32,15 @@ module.exports = (req, res) => {
       let imageIdinDatabase = database.getNextId() // database.add(imageData)
       let imageFolderNumber = (imageIdinDatabase % 1000)
 
+      let imageExtension = uploadedFile.type.split('/').pop()
+      let imageGeneratedName = shortid.generate() + '.' + imageExtension
+
       let imageDir = `/content/user-images/${imageFolderNumber}`
-      let imagePath = `${imageDir}/${uploadedFile.name}`
+      let imagePath = `${imageDir}/${imageGeneratedName}`
 
       let imageData = {}
       imageData.name = fields.name
+      imageData.isPrivate = fields.private
       imageData.url = imagePath
 
       let imageDirOnServer = '.' + imageDir

@@ -24,6 +24,22 @@ let add = (image) => {
   return idOfSavedImage
 }
 
+let getAllPublic = () => {
+  if (!fs.existsSync(dbPath)) {
+    fs.writeFileSync(dbPath, '[]')
+    return []
+  }
+
+  let jsonData = fs.readFileSync(dbPath).toString() || '[]'
+
+  data = JSON.parse(jsonData)
+  let privateData = data.filter(img => {
+    return img.isPrivate === undefined
+  })
+
+  return privateData.slice(0)
+}
+
 let getAll = () => {
   if (!fs.existsSync(dbPath)) {
     fs.writeFileSync(dbPath, '[]')
@@ -50,5 +66,6 @@ module.exports = {
   add: add,
   get: get,
   getAll: getAll,
+  getAllPublic: getAllPublic,
   getNextId: getNextId
 }
